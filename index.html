@@ -68,6 +68,10 @@ footer .logo span{margin-top:5px}
 .form-card label{display:block;font-size:13px;font-weight:600;color:var(--navy-2);margin:14px 0 6px}
 .form-card input,.form-card select{width:100%;padding:14px 15px;border:1.5px solid var(--line);border-radius:11px;font-size:15px;font-family:'Inter';color:var(--text);background:#fff}
 .form-card input:focus,.form-card select:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px var(--blue-soft)}
+.form-card input.valid{border-color:#25A35A}
+.form-card input.invalid{border-color:#E5484D;box-shadow:0 0 0 3px rgba(229,72,77,.14)}
+.err-msg{display:none;font-size:12.5px;color:#E5484D;font-weight:600;margin-top:6px}
+.form-card input.invalid ~ .err-msg{display:block}
 .form-card .btn-blue{width:100%;margin-top:20px;text-transform:uppercase;letter-spacing:.02em}
 .form-card .privacy{font-size:12px;color:var(--muted);text-align:center;margin-top:12px}
 section{padding:76px 0}.head{text-align:center;max-width:640px;margin:0 auto 38px}
@@ -129,7 +133,7 @@ section{padding:76px 0}.head{text-align:center;max-width:640px;margin:0 auto 38p
       <p class="small">Preencha e um especialista te chama no WhatsApp com as melhores ofertas.</p>
       <form onsubmit="return enviarLead(event)">
         <label>Seu nome</label><input id="nome" type="text" placeholder="Nome completo" required>
-        <label>WhatsApp (com DDD)</label><input id="fone" type="tel" placeholder="(21) 90000-0000" required>
+        <label>WhatsApp (com DDD)</label><input id="fone" name="fone" type="tel" inputmode="numeric" maxlength="16" placeholder="(21) 90000-0000" required><span class="err-msg" id="fone-err">Número inválido. Use: (XX) 9XXXX-XXXX</span>
         <label>Renda familiar</label>
         <select id="renda" required><option value="" disabled selected>Selecione a renda familiar</option><option>Até R$ 5.000</option><option>R$ 5.000 a R$ 8.000</option><option>R$ 8.000 a R$ 12.000</option><option>R$ 12.000 a R$ 20.000</option><option>Acima de R$ 20.000</option></select>
         <button type="submit" class="btn btn-blue">Receber condições exclusivas</button>
@@ -315,7 +319,16 @@ section{padding:76px 0}.head{text-align:center;max-width:640px;margin:0 auto 38p
 </div><div class="copy">© 2026 Cury Lançamentos · CRECI 23.670-J (Resp. Técnico: Renato Silva Correia) · <a href="politica-de-privacidade.html" style="color:#8894B0;text-decoration:underline">Política de Privacidade</a><br>Site de divulgação de corretor autorizado. Cury Construtora S.A.</div></footer>
 <a class="float-wa" href="https://wa.me/5521959434519?text=Ol%C3%A1!%20Quero%20saber%20mais%20sobre%20os%20lan%C3%A7amentos%20Cury." target="_blank" rel="noopener" aria-label="WhatsApp"><svg width="30" height="30" viewBox="0 0 24 24" fill="#fff"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.945C.16 5.335 5.5 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24z"/></svg></a>
 <script>
+// Máscara e validação de telefone: (XX) 9XXXX-XXXX
+var TEL_RE=/^\(\d{2}\) 9\d{4}-\d{4}$/;
+function maskTel(v){v=v.replace(/\D/g,'').slice(0,11);if(v.length>7)return '('+v.slice(0,2)+') '+v.slice(2,7)+'-'+v.slice(7);if(v.length>2)return '('+v.slice(0,2)+') '+v.slice(2);return v;}
+(function(){var t=document.getElementById('fone');if(!t)return;
+  t.addEventListener('input',function(){t.value=maskTel(t.value);if(TEL_RE.test(t.value)){t.classList.remove('invalid');t.classList.add('valid');}else{t.classList.remove('valid');}});
+  t.addEventListener('blur',function(){if(t.value&&!TEL_RE.test(t.value)){t.classList.add('invalid');}});
+})();
 function enviarLead(ev){ev.preventDefault();var n=nome.value.trim(),f=fone.value.trim(),r=renda.value;
+var foneEl=document.getElementById('fone');
+if(!TEL_RE.test(foneEl.value)){foneEl.classList.remove('valid');foneEl.classList.add('invalid');foneEl.focus();return false;}
 var msg='Olá! Quero receber as condições exclusivas dos lançamentos Cury.\nNome: '+n+'\nWhatsApp: '+f+'\nRenda familiar: '+r;
 if(window.dataLayer)dataLayer.push({event:'generate_lead',form_origin:'hero'});
 if(window.fbq)fbq('track','Lead');
