@@ -8,9 +8,9 @@ fbq('track', 'PageView');
 </script>
 <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1902592370422998&ev=PageView&noscript=1"/></noscript>
 <!-- End Meta Pixel Code -->
-<title>Cury Lançamentos | 16 empreendimentos no Rio de Janeiro</title>
+<title>Cury Lançamentos | 18 empreendimentos no Rio de Janeiro</title>
 <link rel="icon" href="assets/favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png"><link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png"><link rel="apple-touch-icon" href="assets/favicon-180.png">
-<meta name="description" content="16 lançamentos Cury no Rio de Janeiro. Apartamentos de 1 a 3 quartos com condições facilitadas e subsídio do Minha Casa Minha Vida.">
+<meta name="description" content="18 lançamentos Cury no Rio de Janeiro. Apartamentos de 1 a 3 quartos com condições facilitadas e subsídio do Minha Casa Minha Vida.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -72,6 +72,8 @@ footer .logo span{margin-top:5px}
 .form-card input.invalid{border-color:#E5484D;box-shadow:0 0 0 3px rgba(229,72,77,.14)}
 .err-msg{display:none;font-size:12.5px;color:#E5484D;font-weight:600;margin-top:6px}
 .form-card input.invalid ~ .err-msg{display:block}
+.ok-msg{display:none;font-size:12.5px;color:#1E8E4E;font-weight:600;margin-top:6px}
+.form-card input.valid ~ .ok-msg{display:block}
 .form-card .btn-blue{width:100%;margin-top:20px;text-transform:uppercase;letter-spacing:.02em}
 .form-card .privacy{font-size:12px;color:var(--muted);text-align:center;margin-top:12px}
 section{padding:76px 0}.head{text-align:center;max-width:640px;margin:0 auto 38px}
@@ -121,7 +123,7 @@ section{padding:76px 0}.head{text-align:center;max-width:640px;margin:0 auto 38p
   <div class="hero-overlay"></div>
   <div class="wrap hero-grid">
     <div>
-      <h1>16 lançamentos Cury no <em>Rio de Janeiro</em></h1>
+      <h1>18 lançamentos Cury no <em>Rio de Janeiro</em></h1>
       <p class="sub">Do Porto Maravilha à Barra e Niterói. Apartamentos de 1 a 3 quartos com condições facilitadas e subsídio do Minha Casa Minha Vida.</p>
       <div class="hero-actions">
         <a class="btn btn-blue" href="#empreendimentos">Ver empreendimentos</a>
@@ -129,22 +131,30 @@ section{padding:76px 0}.head{text-align:center;max-width:640px;margin:0 auto 38p
       </div>
     </div>
     <div class="form-card" id="lead-form">
+      <div id="form-inner">
       <h3>Receba condições exclusivas</h3>
-      <p class="small">Preencha e um especialista te chama no WhatsApp com as melhores ofertas.</p>
-      <form onsubmit="return enviarLead(event)">
-        <label>Seu nome</label><input id="nome" type="text" placeholder="Nome completo" required>
-        <label>WhatsApp (com DDD)</label><input id="fone" name="fone" type="tel" inputmode="numeric" maxlength="16" placeholder="(21) 90000-0000" required><span class="err-msg" id="fone-err">Número inválido. Use: (XX) 9XXXX-XXXX</span>
+      <p class="small">Preencha e um especialista da Cury entra em contato com as melhores ofertas.</p>
+      <form id="leadForm" onsubmit="return enviarLead(event)">
+        <label>Seu nome</label><input id="nome" name="nome" type="text" placeholder="Nome completo" required>
+        <label>WhatsApp (com DDD)</label><input id="fone" name="fone" type="tel" inputmode="numeric" maxlength="16" placeholder="(21) 90000-0000" required><span class="err-msg" id="fone-err">Número inválido. Use: (XX) 9XXXX-XXXX</span><span class="ok-msg" id="fone-ok"></span>
         <label>Renda familiar</label>
-        <select id="renda" required><option value="" disabled selected>Selecione a renda familiar</option><option>Até R$ 5.000</option><option>R$ 5.000 a R$ 8.000</option><option>R$ 8.000 a R$ 12.000</option><option>R$ 12.000 a R$ 20.000</option><option>Acima de R$ 20.000</option></select>
-        <button type="submit" class="btn btn-blue">Receber condições exclusivas</button>
+        <select id="renda" name="renda" required><option value="" disabled selected>Selecione a renda familiar</option><option>Até R$ 5.000</option><option>R$ 5.000 a R$ 8.000</option><option>R$ 8.000 a R$ 12.000</option><option>R$ 12.000 a R$ 20.000</option><option>Acima de R$ 20.000</option></select>
+        <button type="submit" class="btn btn-blue" id="leadBtn">Receber condições exclusivas</button>
         <p class="privacy">Seus dados estão seguros. Sem spam.</p>
       </form>
+      </div>
+      <div id="form-ok" style="display:none;text-align:center;padding:14px 4px 6px">
+        <div style="width:64px;height:64px;border-radius:50%;background:#E7F6ED;display:flex;align-items:center;justify-content:center;margin:0 auto 14px"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#1E8E4E" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg></div>
+        <h3 style="font-size:22px;color:var(--navy);font-weight:800">Recebemos seus dados!</h3>
+        <p style="color:var(--muted);font-size:15px;margin:8px 0 18px">Em breve um especialista da Cury entra em contato. Se preferir, fale agora mesmo:</p>
+        <a class="btn btn-wa" style="width:100%" href="https://wa.me/5521959434519?text=Ol%C3%A1!%20Acabei%20de%20me%20cadastrar%20no%20site%20e%20quero%20falar%20com%20um%20especialista%20Cury." target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.945C.16 5.335 5.5 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.978-1.607z"/></svg> Falar no WhatsApp</a>
+      </div>
     </div>
   </div>
 </section>
 <section class="empre" id="empreendimentos">
   <div class="wrap">
-    <div class="head"><h2>Nossos Empreendimentos</h2><p>16 lançamentos nas melhores regiões do Rio. Selecione a região para filtrar.</p></div>
+    <div class="head"><h2>Nossos Empreendimentos</h2><p>18 lançamentos nas melhores regiões do Rio. Selecione a região para filtrar.</p></div>
     <div class="filters" id="filters">
       <button class="active" data-f="todos">Todos</button><button data-f="centro">Centro</button><button data-f="zona-norte">Zona Norte</button><button data-f="zona-oeste">Zona Oeste</button><button data-f="niteroi">Niterói</button>
     </div>
@@ -158,8 +168,26 @@ section{padding:76px 0}.head{text-align:center;max-width:640px;margin:0 auto 38p
         <div class="prio-flash">Pré-lançamento</div>
         <span class="btn btn-blue cta">Quero ser prioridade</span>
       </div></a>
+<a class="card" data-region="niteroi" href="empreendimento/orla-central.html">
+      <div class="thumb"><img src="assets/img/orla-central.jpg" alt="Fachada Orla Central" loading="lazy"><span class="badge">Em Obras</span><span class="order">2º lançamento</span></div>
+      <div class="body">
+        <h3>Orla Central</h3>
+        <div class="loc">📍 Caminho Niemeyer — Niterói - RJ</div>
+        <div class="price">R$ 321.999 — R$ 795.500</div>
+        <div class="specs"><span>🛏 1, 2, 3 qts</span><span>▭ 40–120m²</span><span>📅 Q3 2026</span></div>
+        <span class="btn btn-blue cta">Ver empreendimento</span>
+      </div></a>
+<a class="card" data-region="centro" href="empreendimento/saudosa-praca-onze.html">
+      <div class="thumb"><img src="assets/img/saudosa-praca-onze.jpg" alt="Fachada Saudosa Praça Onze" loading="lazy"><span class="badge">Lançamento</span><span class="order">3º lançamento</span></div>
+      <div class="body">
+        <h3>Saudosa Praça Onze</h3>
+        <div class="loc">📍 Praça Onze — Rio de Janeiro - RJ</div>
+        <div class="price">R$ 290.000 — R$ 435.000</div>
+        <div class="specs"><span>🛏 Studio, 1, 2 qts</span><span>▭ 32–49m²</span><span>📅 Lançamento</span></div>
+        <span class="btn btn-blue cta">Ver empreendimento</span>
+      </div></a>
 <a class="card" data-region="centro" href="empreendimento/luzes-do-rio-condominio-lamparina.html">
-      <div class="thumb"><img src="https://cury.net/storage/images/products/gallery/69cd31f2e807e.jpeg" alt="Fachada Luzes do Rio - Condomínio Lamparina" loading="lazy"><span class="badge">Lançamento</span><span class="order">2º lançamento</span></div>
+      <div class="thumb"><img src="https://cury.net/storage/images/products/gallery/69cd31f2e807e.jpeg" alt="Fachada Luzes do Rio - Condomínio Lamparina" loading="lazy"><span class="badge">Lançamento</span><span class="order">4º lançamento</span></div>
       <div class="body">
         <h3>Luzes do Rio - Condomínio Lamparina</h3>
         <div class="loc">📍 Imperial de São Cristóvão — Rio de Janeiro - RJ</div>
@@ -168,34 +196,34 @@ section{padding:76px 0}.head{text-align:center;max-width:640px;margin:0 auto 38p
         <span class="btn btn-blue cta">Ver empreendimento</span>
       </div></a>
 <a class="card" data-region="zona-norte" href="empreendimento/parque-piedade-condominio-aquarela.html">
-      <div class="thumb"><img src="https://cury.net/storage/images/products/gallery/69c6cbd3e9e0a.jpeg" alt="Fachada Parque Piedade - Condomínio Aquarela" loading="lazy"><span class="badge">Lançamento</span><span class="order">3º lançamento</span></div>
+      <div class="thumb"><img src="https://cury.net/storage/images/products/gallery/69c6cbd3e9e0a.jpeg" alt="Fachada Parque Piedade - Condomínio Aquarela" loading="lazy"><span class="badge">Lançamento</span><span class="order">5º lançamento</span></div>
       <div class="body">
         <h3>Parque Piedade - Condomínio Aquarela</h3>
         <div class="loc">📍 Piedade — Rio de Janeiro - RJ</div>
-        <div class="price">R$ 180.000 — R$ 230.000</div>
+        <div class="price">R$ 298.500 — R$ 460.000</div>
         <div class="specs"><span>🛏 2 qts</span><span>▭ 37–45m²</span><span>📅 A definir</span></div>
         <span class="btn btn-blue cta">Ver empreendimento</span>
       </div></a>
 <a class="card" data-region="centro" href="empreendimento/luzes-do-rio.html">
-      <div class="thumb"><img src="https://cury.net/storage/images_webp/products/gallery/6941af17a34ae.jpeg.webp" alt="Fachada Luzes do Rio" loading="lazy"><span class="badge">Lançamento</span><span class="order">4º lançamento</span></div>
+      <div class="thumb"><img src="https://cury.net/storage/images_webp/products/gallery/6941af17a34ae.jpeg.webp" alt="Fachada Luzes do Rio" loading="lazy"><span class="badge">Lançamento</span><span class="order">6º lançamento</span></div>
       <div class="body">
         <h3>Luzes do Rio</h3>
         <div class="loc">📍 Porto Maravilha — Rio de Janeiro - RJ</div>
-        <div class="price">R$ 287.000 — R$ 345.000</div>
+        <div class="price">R$ 289.000 — R$ 489.000</div>
         <div class="specs"><span>🛏 1, 2 qts</span><span>▭ 31–38m²</span><span>📅 2028</span></div>
         <span class="btn btn-blue cta">Ver empreendimento</span>
       </div></a>
 <a class="card" data-region="centro" href="empreendimento/farol-da-guanabara.html">
-      <div class="thumb"><img src="https://cury.net/storage/images_webp/products/gallery/68d54b3859a27.jpeg.webp" alt="Fachada Farol da Guanabara" loading="lazy"><span class="badge">Lançamento</span><span class="order">5º lançamento</span></div>
+      <div class="thumb"><img src="https://cury.net/storage/images_webp/products/gallery/68d54b3859a27.jpeg.webp" alt="Fachada Farol da Guanabara" loading="lazy"><span class="badge">Lançamento</span><span class="order">7º lançamento</span></div>
       <div class="body">
         <h3>Farol da Guanabara</h3>
         <div class="loc">📍 Porto Maravilha — Rio de Janeiro - RJ</div>
-        <div class="price">R$ 300.000 — R$ 520.000</div>
+        <div class="price">R$ 360.000 — R$ 860.000</div>
         <div class="specs"><span>🛏 1, 2, 3 qts</span><span>▭ 32–67m²</span><span>📅 2028</span></div>
         <span class="btn btn-blue cta">Ver empreendimento</span>
       </div></a>
 <a class="card" data-region="zona-norte" href="empreendimento/nova-norte-raizes.html">
-      <div class="thumb"><img src="https://cury.net/storage/images_webp/products/gallery/689e0449e58eb.jpeg.webp" alt="Fachada Nova Norte - Raízes" loading="lazy"><span class="badge">Lançamento</span><span class="order">6º lançamento</span></div>
+      <div class="thumb"><img src="https://cury.net/storage/images_webp/products/gallery/689e0449e58eb.jpeg.webp" alt="Fachada Nova Norte - Raízes" loading="lazy"><span class="badge">Lançamento</span><span class="order">8º lançamento</span></div>
       <div class="body">
         <h3>Nova Norte - Raízes</h3>
         <div class="loc">📍 Irajá — Rio de Janeiro - RJ</div>
@@ -204,7 +232,7 @@ section{padding:76px 0}.head{text-align:center;max-width:640px;margin:0 auto 38p
         <span class="btn btn-blue cta">Ver empreendimento</span>
       </div></a>
 <a class="card" data-region="centro" href="empreendimento/residencial-cartola.html">
-      <div class="thumb"><img src="https://cury.net/storage/images_webp/products/gallery/687fce7908a6b.jpeg.webp" alt="Fachada Residencial Cartola" loading="lazy"><span class="badge">Lançamento</span><span class="order">7º lançamento</span></div>
+      <div class="thumb"><img src="https://cury.net/storage/images_webp/products/gallery/687fce7908a6b.jpeg.webp" alt="Fachada Residencial Cartola" loading="lazy"><span class="badge">Lançamento</span><span class="order">9º lançamento</span></div>
       <div class="body">
         <h3>Residencial Cartola</h3>
         <div class="loc">📍 Porto Maravilha — Rio de Janeiro - RJ</div>
@@ -213,7 +241,7 @@ section{padding:76px 0}.head{text-align:center;max-width:640px;margin:0 auto 38p
         <span class="btn btn-blue cta">Ver empreendimento</span>
       </div></a>
 <a class="card" data-region="centro" href="empreendimento/residencial-pixinguinha.html">
-      <div class="thumb"><img src="https://cury.net/storage/images_webp/products/gallery/681270e476552.jpeg.webp" alt="Fachada Residencial Pixinguinha" loading="lazy"><span class="badge">Em Obras</span><span class="order">8º lançamento</span></div>
+      <div class="thumb"><img src="https://cury.net/storage/images_webp/products/gallery/681270e476552.jpeg.webp" alt="Fachada Residencial Pixinguinha" loading="lazy"><span class="badge">Em Obras</span><span class="order">10º lançamento</span></div>
       <div class="body">
         <h3>Residencial Pixinguinha</h3>
         <div class="loc">📍 Porto Maravilha — Rio de Janeiro - RJ</div>
@@ -222,7 +250,7 @@ section{padding:76px 0}.head{text-align:center;max-width:640px;margin:0 auto 38p
         <span class="btn btn-blue cta">Ver empreendimento</span>
       </div></a>
 <a class="card" data-region="niteroi" href="empreendimento/caminhos-da-guanabara.html">
-      <div class="thumb"><img src="https://cury.net/storage/images_webp/products/gallery/67c9bb96a9943.jpeg.webp" alt="Fachada Caminhos da Guanabara" loading="lazy"><span class="badge">Em Obras</span><span class="order">9º lançamento</span></div>
+      <div class="thumb"><img src="https://cury.net/storage/images_webp/products/gallery/67c9bb96a9943.jpeg.webp" alt="Fachada Caminhos da Guanabara" loading="lazy"><span class="badge">Em Obras</span><span class="order">11º lançamento</span></div>
       <div class="body">
         <h3>Caminhos da Guanabara</h3>
         <div class="loc">📍 Centro de Niterói — Niterói - RJ</div>
@@ -231,7 +259,7 @@ section{padding:76px 0}.head{text-align:center;max-width:640px;margin:0 auto 38p
         <span class="btn btn-blue cta">Ver empreendimento</span>
       </div></a>
 <a class="card" data-region="centro" href="empreendimento/arcos-do-porto.html">
-      <div class="thumb"><img src="https://cury.net/storage/images_webp/products/gallery/67a378fd33033.jpeg.webp" alt="Fachada Arcos do Porto Residencial" loading="lazy"><span class="badge">Em Obras</span><span class="order">10º lançamento</span></div>
+      <div class="thumb"><img src="https://cury.net/storage/images_webp/products/gallery/67a378fd33033.jpeg.webp" alt="Fachada Arcos do Porto Residencial" loading="lazy"><span class="badge">Em Obras</span><span class="order">12º lançamento</span></div>
       <div class="body">
         <h3>Arcos do Porto Residencial</h3>
         <div class="loc">📍 Porto Maravilha — Rio de Janeiro - RJ</div>
@@ -240,7 +268,7 @@ section{padding:76px 0}.head{text-align:center;max-width:640px;margin:0 auto 38p
         <span class="btn btn-blue cta">Ver empreendimento</span>
       </div></a>
 <a class="card" data-region="centro" href="empreendimento/ciata-residencial.html">
-      <div class="thumb"><img src="https://cury.net/storage/images_webp/products/gallery/676197655ace7.jpeg.webp" alt="Fachada Ciata Residencial" loading="lazy"><span class="badge">Em Obras</span><span class="order">11º lançamento</span></div>
+      <div class="thumb"><img src="https://cury.net/storage/images_webp/products/gallery/676197655ace7.jpeg.webp" alt="Fachada Ciata Residencial" loading="lazy"><span class="badge">Em Obras</span><span class="order">13º lançamento</span></div>
       <div class="body">
         <h3>Ciata Residencial</h3>
         <div class="loc">📍 Porto Maravilha — Rio de Janeiro - RJ</div>
@@ -249,7 +277,7 @@ section{padding:76px 0}.head{text-align:center;max-width:640px;margin:0 auto 38p
         <span class="btn btn-blue cta">Ver empreendimento</span>
       </div></a>
 <a class="card" data-region="zona-norte" href="empreendimento/residencial-nova-olaria.html">
-      <div class="thumb"><img src="https://cury.net/storage/images_webp/products/gallery/6751c1adc6b13.jpeg.webp" alt="Fachada Residencial Nova Olaria" loading="lazy"><span class="badge">Lançamento</span><span class="order">12º lançamento</span></div>
+      <div class="thumb"><img src="https://cury.net/storage/images_webp/products/gallery/6751c1adc6b13.jpeg.webp" alt="Fachada Residencial Nova Olaria" loading="lazy"><span class="badge">Lançamento</span><span class="order">14º lançamento</span></div>
       <div class="body">
         <h3>Residencial Nova Olaria</h3>
         <div class="loc">📍 Olaria — Rio de Janeiro - RJ</div>
@@ -258,7 +286,7 @@ section{padding:76px 0}.head{text-align:center;max-width:640px;margin:0 auto 38p
         <span class="btn btn-blue cta">Ver empreendimento</span>
       </div></a>
 <a class="card" data-region="zona-oeste" href="empreendimento/metropolitan-dream.html">
-      <div class="thumb"><img src="https://cury.net/storage/images/products/gallery/66f4789554414.jpeg" alt="Fachada Metropolitan Dream" loading="lazy"><span class="badge">Lançamento</span><span class="order">13º lançamento</span></div>
+      <div class="thumb"><img src="https://cury.net/storage/images/products/gallery/66f4789554414.jpeg" alt="Fachada Metropolitan Dream" loading="lazy"><span class="badge">Lançamento</span><span class="order">15º lançamento</span></div>
       <div class="body">
         <h3>Metropolitan Dream</h3>
         <div class="loc">📍 Centro Metropolitano - Barra Olímpica — Barra da Tijuca, RJ</div>
@@ -267,7 +295,7 @@ section{padding:76px 0}.head{text-align:center;max-width:640px;margin:0 auto 38p
         <span class="btn btn-blue cta">Ver empreendimento</span>
       </div></a>
 <a class="card" data-region="niteroi" href="empreendimento/the-pier-residencial.html">
-      <div class="thumb"><img src="https://cury.net/storage/images_webp/products/gallery/66ce0df34efcc.jpeg.webp" alt="Fachada The Pier Residencial" loading="lazy"><span class="badge">Em Obras</span><span class="order">14º lançamento</span></div>
+      <div class="thumb"><img src="https://cury.net/storage/images_webp/products/gallery/66ce0df34efcc.jpeg.webp" alt="Fachada The Pier Residencial" loading="lazy"><span class="badge">Em Obras</span><span class="order">16º lançamento</span></div>
       <div class="body">
         <h3>The Pier Residencial</h3>
         <div class="loc">📍 Centro de Niterói — Niterói - RJ</div>
@@ -276,7 +304,7 @@ section{padding:76px 0}.head{text-align:center;max-width:640px;margin:0 auto 38p
         <span class="btn btn-blue cta">Ver empreendimento</span>
       </div></a>
 <a class="card" data-region="zona-oeste" href="empreendimento/my-jacarepagua-mood.html">
-      <div class="thumb"><img src="https://cury.net/storage/images_webp/products/gallery/669fc67cf143c.jpeg.webp" alt="Fachada My Jacarepaguá Mood" loading="lazy"><span class="badge">Lançamento</span><span class="order">15º lançamento</span></div>
+      <div class="thumb"><img src="https://cury.net/storage/images_webp/products/gallery/669fc67cf143c.jpeg.webp" alt="Fachada My Jacarepaguá Mood" loading="lazy"><span class="badge">Lançamento</span><span class="order">17º lançamento</span></div>
       <div class="body">
         <h3>My Jacarepaguá Mood</h3>
         <div class="loc">📍 Jacarepaguá — Rio de Janeiro - RJ</div>
@@ -285,7 +313,7 @@ section{padding:76px 0}.head{text-align:center;max-width:640px;margin:0 auto 38p
         <span class="btn btn-blue cta">Ver empreendimento</span>
       </div></a>
 <a class="card" data-region="zona-oeste" href="empreendimento/americas-19.html">
-      <div class="thumb"><img src="https://cury.net/storage/images_webp/products/gallery/65d781ddb24e9.jpeg.webp" alt="Fachada Américas 19" loading="lazy"><span class="badge">Lançamento</span><span class="order">16º lançamento</span></div>
+      <div class="thumb"><img src="https://cury.net/storage/images_webp/products/gallery/65d781ddb24e9.jpeg.webp" alt="Fachada Américas 19" loading="lazy"><span class="badge">Lançamento</span><span class="order">18º lançamento</span></div>
       <div class="body">
         <h3>Américas 19</h3>
         <div class="loc">📍 Recreio dos Bandeirantes — Rio de Janeiro - RJ</div>
@@ -322,18 +350,36 @@ section{padding:76px 0}.head{text-align:center;max-width:640px;margin:0 auto 38p
 // Máscara e validação de telefone: (XX) 9XXXX-XXXX
 var TEL_RE=/^\(\d{2}\) 9\d{4}-\d{4}$/;
 function maskTel(v){v=v.replace(/\D/g,'').slice(0,11);if(v.length>7)return '('+v.slice(0,2)+') '+v.slice(2,7)+'-'+v.slice(7);if(v.length>2)return '('+v.slice(0,2)+') '+v.slice(2);return v;}
-(function(){var t=document.getElementById('fone');if(!t)return;
-  t.addEventListener('input',function(){t.value=maskTel(t.value);if(TEL_RE.test(t.value)){t.classList.remove('invalid');t.classList.add('valid');}else{t.classList.remove('valid');}});
+// Estimativa da operadora pelo prefixo original (antes da portabilidade)
+function operadora(v){
+  var d=v.replace(/\D/g,''); if(d.length<4) return '';
+  var p=d.slice(2).slice(1,3); // 2 dígitos após o 9 do celular
+  var MAP={Vivo:['71','72','67','95','96','97','98','99'],Claro:['68','73','74','75','76','91','92','93','94'],TIM:['69','79','80','81','82','83'],Oi:['84','85','86','87','88','89']};
+  for(var k in MAP){ if(MAP[k].indexOf(p)>=0) return k; }
+  return '';
+}
+(function(){var t=document.getElementById('fone');if(!t)return;var ok=document.getElementById('fone-ok');
+  t.addEventListener('input',function(){t.value=maskTel(t.value);
+    if(TEL_RE.test(t.value)){t.classList.remove('invalid');t.classList.add('valid');
+      var op=operadora(t.value);
+      ok.textContent=op?('\u2713 N\u00famero v\u00e1lido \u00b7 Operadora: '+op+' (estimativa)'):'\u2713 N\u00famero de celular v\u00e1lido';
+    } else { t.classList.remove('valid'); }});
   t.addEventListener('blur',function(){if(t.value&&!TEL_RE.test(t.value)){t.classList.add('invalid');}});
 })();
-function enviarLead(ev){ev.preventDefault();var n=nome.value.trim(),f=fone.value.trim(),r=renda.value;
+function sucessoLead(){var i=document.getElementById('form-inner'),o=document.getElementById('form-ok');if(i)i.style.display='none';if(o)o.style.display='block';}
+function enviarLead(ev){ev.preventDefault();
 var foneEl=document.getElementById('fone');
 if(!TEL_RE.test(foneEl.value)){foneEl.classList.remove('valid');foneEl.classList.add('invalid');foneEl.focus();return false;}
-var msg='Olá! Quero receber as condições exclusivas dos lançamentos Cury.\nNome: '+n+'\nWhatsApp: '+f+'\nRenda familiar: '+r;
+var n=nome.value.trim(),f=fone.value.trim(),r=renda.value;
+var btn=document.getElementById('leadBtn'); if(btn){btn.disabled=true;btn.textContent='Enviando...';}
 if(window.dataLayer)dataLayer.push({event:'generate_lead',form_origin:'hero'});
 if(window.fbq)fbq('track','Lead');
 if(window.CuryTrack)CuryTrack.lead('hero');
-window.open('https://wa.me/5521959434519?text='+encodeURIComponent(msg),'_blank');return false;}
+fetch('https://formsubmit.co/ajax/imoveisjornada@gmail.com',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({_subject:'Novo lead - Cury Lançamentos',Nome:n,WhatsApp:f,'Renda familiar':r,'Operadora (estimativa)':operadora(f),Origem:location.href,_template:'table',_captcha:'false'})})
+.then(function(res){return res.json();})
+.then(function(){sucessoLead();})
+.catch(function(){var msg='Olá! Quero receber as condições exclusivas dos lançamentos Cury.\nNome: '+n+'\nWhatsApp: '+f+'\nRenda familiar: '+r;window.open('https://wa.me/5521959434519?text='+encodeURIComponent(msg),'_blank');sucessoLead();});
+return false;}
 var LIMIT=6, filtro='todos', expandido=false;
 var cards=[].slice.call(document.querySelectorAll('#cards .card'));
 var wrap=document.getElementById('verTodosWrap'), btn=document.getElementById('verTodos');
