@@ -30,7 +30,7 @@ header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.96);backdro
 .logo span{font-size:11px;letter-spacing:.26em;color:var(--blue);font-weight:700;margin-top:4px}
 .menu{display:flex;gap:30px;align-items:center}.menu a{font-weight:600;color:var(--navy-2);font-size:15px}.menu a:hover{color:var(--blue)}
 .burger{display:none;background:none;border:none;cursor:pointer}
-.cury-band{background:#D6E2EE;padding:52px 0;text-align:center}
+.cury-band{background:#D6E2EE;padding:22px 0 50px;text-align:center}
 .cury-band-logo{height:60px;width:auto;display:inline-block}
 .cury-band-txt{margin-top:14px;color:var(--muted);font-size:13px;letter-spacing:.18em;text-transform:uppercase;font-weight:600}
 footer{background:var(--navy);color:#C7D0E4;padding:56px 0 0}
@@ -41,7 +41,9 @@ footer h4{color:#fff;font-size:13px;letter-spacing:.14em;text-transform:uppercas
 footer ul{list-style:none;display:flex;flex-direction:column;gap:11px}footer ul a,footer ul li{font-size:15px;color:#C7D0E4}footer ul a:hover{color:#fff}
 .fcontact li{display:flex;gap:9px;align-items:center}
 .copy{border-top:1px solid rgba(255,255,255,.1);padding:18px 0;text-align:center;font-size:13px;color:#8894B0}
-.float-wa{position:fixed;right:22px;bottom:22px;width:58px;height:58px;border-radius:50%;background:var(--wa);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 22px rgba(0,0,0,.3);z-index:60}
+.float-wa{position:fixed;right:22px;bottom:22px;width:58px;height:58px;border-radius:50%;background:var(--wa);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 22px rgba(0,0,0,.3);z-index:60;animation:wapulse 1.6s infinite}
+.float-wa:hover{animation-play-state:paused}
+@keyframes wapulse{0%{box-shadow:0 8px 22px rgba(0,0,0,.3),0 0 0 0 rgba(37,211,102,.55)}70%{box-shadow:0 8px 22px rgba(0,0,0,.3),0 0 0 18px rgba(37,211,102,0)}100%{box-shadow:0 8px 22px rgba(0,0,0,.3),0 0 0 0 rgba(37,211,102,0)}}
 .logo-img{height:38px;width:auto;display:block}
 .logo-footer{height:32px}
 footer .logo span{margin-top:5px}
@@ -111,7 +113,7 @@ section{padding:76px 0}.head{text-align:center;max-width:640px;margin:0 auto 38p
 .bcard{background:var(--navy);color:#fff;border-radius:var(--radius);padding:36px 28px;text-align:center}
 .bcard .ico{width:110px;height:110px;margin:0 auto 10px}.bcard .ico img{width:100%;height:100%;object-fit:contain}
 .bcard h3{font-size:21px;font-weight:800;margin-bottom:8px}.bcard p{color:#B9C2D6;font-size:15px}
-.band{background:#D6E2EE;color:var(--navy);text-align:center}
+.band{background:#D6E2EE;color:var(--navy);text-align:center;padding:70px 0 20px}
 .band h2{font-size:clamp(26px,3.2vw,36px);font-weight:800;max-width:760px;margin:0 auto;color:var(--navy)}.band p{color:#3E4B63;margin:14px auto 26px;max-width:560px;font-size:17px}
 @media(max-width:900px){.hero-grid{grid-template-columns:1fr;gap:34px}.cards,.bcards{grid-template-columns:1fr 1fr}.fgrid{grid-template-columns:1fr 1fr}}
 @media(max-width:640px){.menu,.btn-blue.navbtn{display:none}.cards,.bcards,.fgrid{grid-template-columns:1fr}section{padding:56px 0}}
@@ -127,7 +129,7 @@ section{padding:76px 0}.head{text-align:center;max-width:640px;margin:0 auto 38p
   <div class="wrap hero-grid">
     <div>
       <h1>18 lançamentos Cury no <em>Rio de Janeiro</em></h1>
-      <p class="sub">Do Porto Maravilha à Barra e Niterói. Apartamentos de 1 a 3 quartos com condições facilitadas e subsídio do Minha Casa Minha Vida.</p>
+      <p class="sub">Do Porto Maravilha à Barra e Niterói. Apartamentos de Studio, 1 a 3 quartos com condições facilitadas e subsídio do Minha Casa Minha Vida.</p>
       <div class="hero-actions">
         <a class="btn btn-blue" href="#empreendimentos">Ver empreendimentos</a>
         <a class="btn btn-ghost" href="https://wa.me/5521959434519?text=Ol%C3%A1!%20Quero%20falar%20com%20um%20especialista%20Cury." target="_blank" rel="noopener">Falar com especialista</a>
@@ -194,7 +196,7 @@ section{padding:76px 0}.head{text-align:center;max-width:640px;margin:0 auto 38p
       <div class="body">
         <h3>Luzes do Rio - Condomínio Lamparina</h3>
         <div class="loc">📍 Imperial de São Cristóvão — Rio de Janeiro - RJ</div>
-        <div class="price">R$ 200.000 — R$ 260.000</div>
+        <div class="price">R$ 290.000 — R$ 349.500</div>
         <div class="specs"><span>🛏 1, 2 qts</span><span>▭ 38–45m²</span><span>📅 A definir</span></div>
         <span class="btn btn-blue cta">Ver empreendimento</span>
       </div></a>
