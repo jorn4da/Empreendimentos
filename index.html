@@ -141,7 +141,9 @@ section{padding:76px 0}.head{text-align:center;max-width:640px;margin:0 auto 38p
       <p class="small">Preencha e um especialista da Cury entra em contato com as melhores ofertas.</p>
       <form id="leadForm" onsubmit="return enviarLead(event)">
         <label>Seu nome</label><input id="nome" name="nome" type="text" placeholder="Nome completo" required>
-        <label>WhatsApp (com DDD)</label><input id="fone" name="fone" type="tel" inputmode="numeric" maxlength="16" placeholder="(21) 90000-0000" required><span class="err-msg" id="fone-err">Número inválido. Use: (XX) 9XXXX-XXXX</span><span class="ok-msg" id="fone-ok"></span>
+        <label>WhatsApp (com DDD)</label><input id="fone" name="fone" type="tel" inputmode="numeric" maxlength="16" placeholder="(21) 90000-0000" required><span class="err-msg" id="fone-err">Número inválido. Confira o DDD e use (XX) 9XXXX-XXXX</span><span class="ok-msg" id="fone-ok"></span>
+        <label>Empreendimento de interesse</label>
+        <select id="projeto" name="projeto" required><option value="" disabled selected>Selecione o empreendimento</option><option>Erê</option><option>Nova Leopoldina</option><option>Orla Central</option><option>Saudosa Praça Onze</option><option>Luzes do Rio - Condomínio Lamparina</option><option>Parque Piedade - Condomínio Aquarela</option><option>Luzes do Rio</option><option>Farol da Guanabara</option><option>Nova Norte - Raízes</option><option>Residencial Cartola</option><option>Residencial Pixinguinha</option><option>Caminhos da Guanabara</option><option>Arcos do Porto Residencial</option><option>Ciata Residencial</option><option>Residencial Nova Olaria</option><option>Metropolitan Dream</option><option>The Pier Residencial</option><option>My Jacarepaguá Mood</option><option>Américas 19</option><option>Ainda não decidi / quero ver opções</option></select>
         <label>Renda familiar</label>
         <select id="renda" name="renda" required><option value="" disabled selected>Selecione a renda familiar</option><option>Até R$ 5.000</option><option>R$ 5.000 a R$ 8.000</option><option>R$ 8.000 a R$ 12.000</option><option>R$ 12.000 a R$ 20.000</option><option>Acima de R$ 20.000</option></select>
         <button type="submit" class="btn btn-blue" id="leadBtn">Receber condições exclusivas</button>
@@ -231,9 +233,9 @@ section{padding:76px 0}.head{text-align:center;max-width:640px;margin:0 auto 38p
       <div class="thumb"><img src="https://cury.net/storage/images_webp/products/gallery/68d54b3859a27.jpeg.webp" alt="Fachada Farol da Guanabara" loading="lazy"><span class="badge">Lançamento</span><span class="order">8º lançamento</span></div>
       <div class="body">
         <h3>Farol da Guanabara</h3>
-        <div class="loc">📍 Porto Maravilha — Rio de Janeiro - RJ</div>
+        <div class="loc">📍 Av. Rodrigues Alves, 733 — Porto Maravilha (Santo Cristo), Rio de Janeiro - RJ</div>
         <div class="price">R$ 360.000 — R$ 860.000</div>
-        <div class="specs"><span>🛏 1, 2, 3 qts</span><span>▭ 32–67m²</span><span>📅 2028</span></div>
+        <div class="specs"><span>🛏 Studio, 1, 3 qts</span><span>▭ 33–77m²</span><span>📅 3º Trimestre</span></div>
         <span class="btn btn-blue cta">Ver empreendimento</span>
       </div></a>
 <a class="card" data-region="zona-norte" href="empreendimento/nova-norte-raizes.html">
@@ -362,39 +364,37 @@ section{padding:76px 0}.head{text-align:center;max-width:640px;margin:0 auto 38p
 </div><div class="copy">© 2026 Cury Lançamentos · CRECI 23.670-J (Resp. Técnico: Renato Silva Correia) · <a href="politica-de-privacidade.html" style="color:#8894B0;text-decoration:underline">Política de Privacidade</a><br>Site de divulgação de corretor autorizado. Cury Construtora S.A.</div></footer>
 <a class="float-wa" href="https://wa.me/5521959434519?text=Ol%C3%A1!%20Quero%20saber%20mais%20sobre%20os%20lan%C3%A7amentos%20Cury." target="_blank" rel="noopener" aria-label="WhatsApp"><svg width="30" height="30" viewBox="0 0 24 24" fill="#fff"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.945C.16 5.335 5.5 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24z"/></svg></a>
 <script>
-// Máscara e validação de telefone: (XX) 9XXXX-XXXX
-var TEL_RE=/^\(\d{2}\) 9\d{4}-\d{4}$/;
+// Máscara e validação de telefone celular brasileiro: (XX) 9XXXX-XXXX
+var TEL_RE=/^\((\d{2})\) 9\d{4}-\d{4}$/;
+// DDDs válidos no Brasil (ANATEL)
+var DDDS='11 12 13 14 15 16 17 18 19 21 22 24 27 28 31 32 33 34 35 37 38 41 42 43 44 45 46 47 48 49 51 53 54 55 61 62 63 64 65 66 67 68 69 71 73 74 75 77 79 81 82 83 84 85 86 87 88 89 91 92 93 94 95 96 97 98 99'.split(' ');
 function maskTel(v){v=v.replace(/\D/g,'').slice(0,11);if(v.length>7)return '('+v.slice(0,2)+') '+v.slice(2,7)+'-'+v.slice(7);if(v.length>2)return '('+v.slice(0,2)+') '+v.slice(2);return v;}
-// Estimativa da operadora pelo prefixo original (antes da portabilidade)
-function operadora(v){
-  var d=v.replace(/\D/g,''); if(d.length<4) return '';
-  var p=d.slice(2).slice(1,3); // 2 dígitos após o 9 do celular
-  var MAP={Vivo:['71','72','67','95','96','97','98','99'],Claro:['68','73','74','75','76','91','92','93','94'],TIM:['69','79','80','81','82','83'],Oi:['84','85','86','87','88','89']};
-  for(var k in MAP){ if(MAP[k].indexOf(p)>=0) return k; }
-  return '';
-}
+// número é celular válido: formato + DDD real + não pode ser sequência repetida
+function foneValido(v){var m=v.match(TEL_RE);if(!m)return false;if(DDDS.indexOf(m[1])<0)return false;var d=v.replace(/\D/g,'');if(/^(\d)\1{10}$/.test(d))return false;return true;}
 (function(){var t=document.getElementById('fone');if(!t)return;var ok=document.getElementById('fone-ok');
   t.addEventListener('input',function(){t.value=maskTel(t.value);
-    if(TEL_RE.test(t.value)){t.classList.remove('invalid');t.classList.add('valid');
-      var op=operadora(t.value);
-      ok.textContent=op?('\u2713 N\u00famero v\u00e1lido \u00b7 Operadora: '+op+' (estimativa)'):'\u2713 N\u00famero de celular v\u00e1lido';
+    if(foneValido(t.value)){t.classList.remove('invalid');t.classList.add('valid');
+      ok.textContent='\u2713 N\u00famero de WhatsApp v\u00e1lido';
     } else { t.classList.remove('valid'); }});
-  t.addEventListener('blur',function(){if(t.value&&!TEL_RE.test(t.value)){t.classList.add('invalid');}});
+  t.addEventListener('blur',function(){if(t.value&&!foneValido(t.value)){t.classList.add('invalid');}});
 })();
 function sucessoLead(){var i=document.getElementById('form-inner'),o=document.getElementById('form-ok');if(i)i.style.display='none';if(o)o.style.display='block';}
 function enviarLead(ev){ev.preventDefault();
 var foneEl=document.getElementById('fone');
-if(!TEL_RE.test(foneEl.value)){foneEl.classList.remove('valid');foneEl.classList.add('invalid');foneEl.focus();return false;}
+if(!foneValido(foneEl.value)){foneEl.classList.remove('valid');foneEl.classList.add('invalid');foneEl.focus();return false;}
 var n=nome.value.trim(),f=fone.value.trim(),r=renda.value;
+var proj=(document.getElementById('projeto')||{}).value||'';
 var btn=document.getElementById('leadBtn'); if(btn){btn.disabled=true;btn.textContent='Enviando...';}
-if(window.dataLayer)dataLayer.push({event:'generate_lead',form_origin:'hero'});
-if(window.fbq)fbq('track','Lead');
+if(window.dataLayer)dataLayer.push({event:'generate_lead',form_origin:'hero',empreendimento:proj});
+if(window.fbq)fbq('track','Lead',{content_name:proj});
 if(window.CuryTrack)CuryTrack.lead('hero');
-fetch('https://formsubmit.co/ajax/imoveisjornada@gmail.com',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({_subject:'Novo lead - Cury Lançamentos',Nome:n,WhatsApp:f,'Renda familiar':r,'Operadora (estimativa)':operadora(f),Origem:location.href,_template:'table',_captcha:'false'})})
+fetch('https://formsubmit.co/ajax/imoveisjornada@gmail.com',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({_subject:'Novo lead'+(proj?(' - '+proj):'')+' | Cury Lançamentos','Empreendimento de interesse':proj,Nome:n,WhatsApp:f,'Renda familiar':r,Origem:location.href,_template:'table',_captcha:'false'})})
 .then(function(res){return res.json();})
 .then(function(){sucessoLead();})
-.catch(function(){var msg='Olá! Quero receber as condições exclusivas dos lançamentos Cury.\nNome: '+n+'\nWhatsApp: '+f+'\nRenda familiar: '+r;window.open('https://wa.me/5521959434519?text='+encodeURIComponent(msg),'_blank');sucessoLead();});
+.catch(function(){var msg='Olá! Quero receber as condições exclusivas dos lançamentos Cury.\nEmpreendimento de interesse: '+proj+'\nNome: '+n+'\nWhatsApp: '+f+'\nRenda familiar: '+r;window.open('https://wa.me/5521959434519?text='+encodeURIComponent(msg),'_blank');sucessoLead();});
 return false;}
+// Pré-seleciona o empreendimento quando o cliente vem de uma página específica (?proj=Nome)
+(function(){try{var q=new URLSearchParams(location.search).get('proj');if(!q)return;var s=document.getElementById('projeto');if(!s)return;for(var i=0;i<s.options.length;i++){if(s.options[i].value===q||s.options[i].text===q){s.selectedIndex=i;break;}}}catch(e){}})();
 var LIMIT=6, filtro='todos', expandido=false;
 var cards=[].slice.call(document.querySelectorAll('#cards .card'));
 var wrap=document.getElementById('verTodosWrap'), btn=document.getElementById('verTodos');
