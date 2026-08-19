@@ -388,7 +388,7 @@ var btn=document.getElementById('leadBtn'); if(btn){btn.disabled=true;btn.textCo
 if(window.dataLayer)dataLayer.push({event:'generate_lead',form_origin:'hero',empreendimento:proj});
 if(window.fbq)fbq('track','Lead',{content_name:proj});
 if(window.CuryTrack)CuryTrack.lead('hero');
-fetch('https://formsubmit.co/ajax/imoveisjornada@gmail.com',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({_subject:'Novo lead'+(proj?(' - '+proj):'')+' | Cury Lançamentos','Empreendimento de interesse':proj,Nome:n,WhatsApp:f,'Renda familiar':r,Origem:location.href,_template:'table',_captcha:'false'})})
+fetch('https://script.google.com/macros/s/AKfycbyeCg1rfo85NcgTM15vE2dLzhPqomi23nAiLItM63QqhwqTC5CAmoihL2J713Dqx-nB/exec',{method:'POST',mode:'no-cors',keepalive:true,headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({Nome:n,WhatsApp:f,Renda:r,Empreendimento:proj,Interesse:'Cadastro site',Origem:location.href})}).catch(function(){});fetch('https://formsubmit.co/ajax/imoveisjornada@gmail.com',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({_subject:'Novo lead'+(proj?(' - '+proj):'')+' | Cury Lançamentos','Empreendimento de interesse':proj,Nome:n,WhatsApp:f,'Renda familiar':r,Origem:location.href,_template:'table',_captcha:'false'})})
 .then(function(res){return res.json();})
 .then(function(){sucessoLead();})
 .catch(function(){var msg='Olá! Quero receber as condições exclusivas dos lançamentos Cury.\nEmpreendimento de interesse: '+proj+'\nNome: '+n+'\nWhatsApp: '+f+'\nRenda familiar: '+r;window.open('https://wa.me/5521959434519?text='+encodeURIComponent(msg),'_blank');sucessoLead();});
