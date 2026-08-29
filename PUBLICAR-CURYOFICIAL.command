@@ -30,7 +30,12 @@ else
 fi
 
 echo "→ Enviando para o GitHub..."
-git push origin main
+if ! git push origin main 2>/dev/null; then
+  echo "→ O repositório tinha novidades. Sincronizando e reenviando..."
+  export GIT_EDITOR=true
+  git pull origin main --rebase || git pull origin main --no-rebase || true
+  git push origin main
+fi
 
 echo ""
 echo "✅ Publicado em: https://github.com/jorn4da/Empreendimentos"
