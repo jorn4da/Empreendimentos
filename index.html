@@ -145,7 +145,7 @@ section{padding:76px 0}.head{text-align:center;max-width:640px;margin:0 auto 38p
         <label>Empreendimento de interesse</label>
         <select id="projeto" name="projeto" data-nl-field="message" required><option value="" disabled selected>Selecione o empreendimento</option><option>Erê</option><option>Nova Leopoldina</option><option>Orla Central</option><option>Saudosa Praça Onze</option><option>Luzes do Rio - Condomínio Lamparina</option><option>Parque Piedade - Condomínio Aquarela</option><option>Luzes do Rio</option><option>Farol da Guanabara</option><option>Nova Norte - Raízes</option><option>Residencial Cartola</option><option>Residencial Pixinguinha</option><option>Caminhos da Guanabara</option><option>Arcos do Porto Residencial</option><option>Ciata Residencial</option><option>Residencial Nova Olaria</option><option>Metropolitan Dream</option><option>The Pier Residencial</option><option>My Jacarepaguá Mood</option><option>Américas 19</option><option>Ainda não decidi / quero ver opções</option></select>
         <label>Renda familiar</label>
-        <select id="renda" name="renda" required><option value="" disabled selected>Selecione a renda familiar</option><option>Até R$ 5.000</option><option>R$ 5.000 a R$ 8.000</option><option>R$ 8.000 a R$ 12.000</option><option>R$ 12.000 a R$ 20.000</option><option>Acima de R$ 20.000</option></select>
+        <select id="renda" name="renda" required><option value="" disabled selected>Selecione a renda familiar</option><option>Até R$ 5 mil</option><option>De R$ 5.000,01 até R$ 9.600</option><option>De R$ 9.600 até R$ 13.000</option><option>Acima de R$ 13.000</option></select>
         <button type="submit" class="btn btn-blue" id="leadBtn">Receber condições exclusivas</button>
         <p class="privacy">Seus dados estão seguros. Sem spam.</p>
       </form>
@@ -171,7 +171,7 @@ section{padding:76px 0}.head{text-align:center;max-width:640px;margin:0 auto 38p
         <h3>Erê</h3>
         <div class="loc">📍 Av. Rodrigues Alves, 733 (Galpão ao lado do Nau) — Zona Portuária, Rio de Janeiro - RJ</div>
         <div class="price prio">🔥 Vagas limitadas · seja prioridade</div>
-        <div class="specs"><span>🛏 Studio, 1, 3 qts</span><span>🏊 Vista para a Baía de Guanabara</span></div>
+        <div class="specs"><span>🛏 Studio, 1 e Double qts</span><span>🏊 Vista para a Baía de Guanabara</span></div>
         <div class="prio-flash">Pré-lançamento</div>
         <span class="btn btn-blue cta">Quero ser prioridade</span>
       </div></a>
@@ -388,7 +388,7 @@ var btn=document.getElementById('leadBtn'); if(btn){btn.disabled=true;btn.textCo
 if(window.dataLayer)dataLayer.push({event:'generate_lead',form_origin:'hero',empreendimento:proj});
 if(window.fbq)fbq('track','Lead',{content_name:proj});
 if(window.CuryTrack)CuryTrack.lead('hero');
-fetch('https://formsubmit.co/ajax/imoveisjornada@gmail.com',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({_subject:'Novo lead'+(proj?(' - '+proj):'')+' | Cury Lançamentos','Empreendimento de interesse':proj,Nome:n,WhatsApp:f,'Renda familiar':r,Origem:location.href,_template:'table',_captcha:'false'})})
+fetch('https://script.google.com/macros/s/AKfycbyeCg1rfo85NcgTM15vE2dLzhPqomi23nAiLItM63QqhwqTC5CAmoihL2J713Dqx-nB/exec',{method:'POST',mode:'no-cors',keepalive:true,headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({Nome:n,WhatsApp:f,Renda:r,Empreendimento:proj,Interesse:'Cadastro site',Origem:location.href})}).catch(function(){});fetch('https://formsubmit.co/ajax/imoveisjornada@gmail.com',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({_subject:'Novo lead'+(proj?(' - '+proj):'')+' | Cury Lançamentos','Empreendimento de interesse':proj,Nome:n,WhatsApp:f,'Renda familiar':r,Origem:location.href,_template:'table',_captcha:'false'})})
 .then(function(res){return res.json();})
 .then(function(){sucessoLead();})
 .catch(function(){var msg='Olá! Quero receber as condições exclusivas dos lançamentos Cury.\nEmpreendimento de interesse: '+proj+'\nNome: '+n+'\nWhatsApp: '+f+'\nRenda familiar: '+r;window.open('https://wa.me/5521959434519?text='+encodeURIComponent(msg),'_blank');sucessoLead();});
