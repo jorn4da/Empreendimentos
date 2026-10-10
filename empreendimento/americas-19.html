@@ -150,10 +150,11 @@ document.addEventListener('DOMContentLoaded',function(){
   document.querySelectorAll('a[href*="wa.me/"]').forEach(function(a){
     a.addEventListener('click',function(){
       if(window.dataLayer)dataLayer.push({event:'whatsapp_click',zap_origem:a.getAttribute('data-zap-origem')||''});
-      if(window.fbq)fbq('track','Contact');
+      /* Pixel Contact dispara na página de obrigado */
       if(window.CuryTrack)CuryTrack.whatsapp();
     });
   });
 });
 </script>
+<script src="/assets/ty-hook.js"></script>
 </body></html>

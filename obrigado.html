@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Obrigado | Cury Lançamentos</title>
+<meta name="robots" content="noindex, nofollow" />
+<meta name="description" content="Em instantes um especialista Cury fala com você no WhatsApp." />
+<link rel="icon" href="/assets/favicon.ico" sizes="any" />
+<link rel="apple-touch-icon" href="/assets/favicon-180.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+<script>
+/* ============ CONFIGURAÇÃO DA PÁGINA DE OBRIGADO (padrão) ============ */
+var TY = {
+  empreendimento: 'Cury Lançamentos (curyoficial.com)',
+  whatsapp: '5521959434519',
+  pixel: '1902592370422998',
+  segundosForm: 4,
+  segundosWhats: 2
+};
+var LEAD = null;
+try { LEAD = JSON.parse(sessionStorage.getItem('ty_lead') || 'null'); } catch(e) {}
+var Q = new URLSearchParams(location.search);
+var TIPO = (LEAD && LEAD.tipo) || Q.get('tipo') || 'form';
+var ORIGEM = (LEAD && LEAD.origem) || Q.get('origem') || 'direto';
+var JA_CONTOU = false;
+try { JA_CONTOU = !!(LEAD && sessionStorage.getItem('ty_done_' + LEAD.id)); } catch(e) {}
+var CONTAR = !!LEAD && !JA_CONTOU;
+</script>
+
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', TY.pixel);
+fbq('track', 'PageView');
+if (CONTAR) {
+  /* Formulário = Lead (cadastro com nome, WhatsApp e renda). Clique no WhatsApp = Contact. */
+  fbq('track', TIPO === 'whatsapp' ? 'Contact' : 'Lead',
+      { content_name: (LEAD.empreendimento || TY.empreendimento), content_category: ORIGEM },
+      { eventID: LEAD.id });
+}
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1902592370422998&ev=PageView&noscript=1"/></noscript>
+<!-- End Meta Pixel Code -->
+<script>
+window.dataLayer = window.dataLayer || [];
+if (CONTAR) {
+  dataLayer.push({ event: TIPO === 'whatsapp' ? 'whatsapp_obrigado' : 'lead_obrigado', origem: ORIGEM });
+  try { sessionStorage.setItem('ty_done_' + LEAD.id, '1'); } catch(e) {}
+}
+</script>
+
+<style>
+:root{--navy:#14213D;--navy-2:#1B2A4A;--blue:#3B5BE0;--blue-dark:#2A44C4;--blue-soft:#EAEEFF;--bg:#F5F6F8;--white:#fff;--text:#1B2A4A;--muted:#5B6472;--line:#E4E7EC;--wa:#25D366;--radius:16px}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;color:var(--text);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh;display:flex;flex-direction:column}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+h1,h2,h3{font-family:'Archivo',sans-serif;letter-spacing:-.02em;line-height:1.15}
+header{background:var(--white);border-bottom:1px solid var(--line)}
+.wrap{max-width:760px;margin:0 auto;padding:0 20px}
+.logo{display:inline-flex;flex-direction:column;align-items:flex-start;line-height:1;padding:16px 0}
+.logo img{height:30px;width:auto;max-width:160px;object-fit:contain}
+.logo span{font-size:11px;letter-spacing:.26em;color:var(--blue);font-weight:700;margin-top:5px}
+main{flex:1;padding:44px 0 64px}
+.card{background:var(--white);border-radius:var(--radius);box-shadow:0 18px 48px rgba(20,33,61,.10);padding:44px 34px;text-align:center}
+.check{width:72px;height:72px;border-radius:50%;background:var(--blue);display:grid;place-items:center;margin:0 auto 22px;animation:pop .5s ease-out;box-shadow:0 10px 26px rgba(59,91,224,.35)}
+.check svg{width:36px;height:36px;stroke:#fff;fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+@keyframes pop{0%{transform:scale(.4);opacity:0}70%{transform:scale(1.08)}100%{transform:scale(1);opacity:1}}
+.eyebrow{font-weight:700;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--blue)}
+h1{font-weight:900;font-size:clamp(1.6rem,4.6vw,2.2rem);margin:10px 0 14px;color:var(--navy)}
+.lead{color:var(--muted);font-size:1rem;max-width:520px;margin:0 auto}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font-weight:700;font-size:1rem;padding:16px 28px;border-radius:999px;border:none;cursor:pointer;transition:.2s;width:100%;max-width:420px}
+.btn-wa{background:var(--wa);color:#fff;margin-top:28px;box-shadow:0 10px 26px rgba(37,211,102,.35)}
+.btn-wa:hover{background:#1eb457;transform:translateY(-2px)}
+.btn-wa svg{width:22px;height:22px;fill:#fff}
+.timer{font-size:.86rem;color:var(--muted);margin-top:12px;min-height:1.3em}
+.timer b{color:var(--navy)}
+.sec-title{font-weight:800;font-size:1.3rem;color:var(--navy);margin:44px 0 6px}
+.sec-sub{color:var(--muted);font-size:.93rem}
+.steps{margin-top:16px;display:grid;gap:12px}
+.step{display:flex;gap:16px;align-items:flex-start;background:var(--white);border:1px solid var(--line);border-radius:12px;padding:18px 20px}
+.step .n{flex:0 0 34px;height:34px;border-radius:50%;background:var(--blue-soft);color:var(--blue);font-family:'Archivo',sans-serif;font-weight:900;display:grid;place-items:center}
+.step h3{font-size:1rem;color:var(--navy);margin-bottom:2px}
+.step p{font-size:.92rem;color:var(--muted)}
+.docs{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+.docs li{background:var(--white);border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-size:.9rem;display:flex;gap:10px;align-items:center}
+.docs li::before{content:'';flex:0 0 8px;height:8px;border-radius:50%;background:var(--blue)}
+.more{margin-top:36px;background:var(--navy);color:#fff;border-radius:var(--radius);padding:28px 26px;text-align:center}
+.more h3{font-size:1.2rem;margin-bottom:6px}
+.more p{font-size:.93rem;color:rgba(255,255,255,.78)}
+.more a{display:inline-block;margin-top:16px;background:var(--blue);color:#fff;font-weight:700;padding:13px 24px;border-radius:999px}
+.more a:hover{background:var(--blue-dark)}
+footer{background:var(--navy);color:rgba(255,255,255,.6);font-size:.75rem;padding:22px 0;text-align:center}
+footer a{color:#9FB2FF}
+@media (max-width:560px){ main{padding:26px 0 48px} .card{padding:34px 20px} .docs{grid-template-columns:1fr} }
+</style>
+</head>
+<body>
+<header><div class="wrap"><a href="/index.html" class="logo"><img src="/assets/logo-cury.png" alt="Cury" /><span>LANÇAMENTOS</span></a></div></header>
+
+<main>
+  <div class="wrap">
+    <section class="card">
+      <div class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <span class="eyebrow" id="tyEyebrow">Cadastro confirmado</span>
+      <h1 id="tyTitle">Recebemos seu cadastro!</h1>
+      <p class="lead" id="tyLead">Um especialista Cury vai te atender no WhatsApp com as condições do lançamento e a simulação para a sua renda.</p>
+      <a href="#" id="tyWpp" class="btn btn-wa"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>Falar com o especialista agora</a>
+      <p class="timer" id="tyTimer"></p>
+    </section>
+
+    <h2 class="sec-title">O que acontece agora</h2>
+    <div class="steps">
+      <div class="step"><span class="n">1</span><div><h3>Atendimento no WhatsApp</h3><p>O especialista entende o que você procura: região, tamanho do apartamento e se é para morar ou investir.</p></div></div>
+      <div class="step"><span class="n">2</span><div><h3>Simulação com a sua renda</h3><p>Você descobre o valor da parcela, o subsídio do Minha Casa Minha Vida e como usar o FGTS na entrada.</p></div></div>
+      <div class="step"><span class="n">3</span><div><h3>Escolha da sua unidade</h3><p>Com a aprovação encaminhada, você garante andar e posição antes que as melhores unidades saiam.</p></div></div>
+    </div>
+
+    <h2 class="sec-title">Adiante a sua aprovação</h2>
+    <p class="sec-sub">Separe estes documentos. Com eles a análise de crédito sai bem mais rápido.</p>
+    <ul class="docs">
+      <li>RG e CPF (ou CNH)</li>
+      <li>Comprovante de renda</li>
+      <li>Comprovante de residência</li>
+      <li>Certidão de estado civil</li>
+      <li>Extrato do FGTS (se tiver)</li>
+      <li>Carteira de trabalho</li>
+    </ul>
+
+    <div class="more">
+      <h3>Enquanto isso, conheça os outros lançamentos</h3>
+      <p>Empreendimentos Cury no Centro, Zona Norte, Zona Oeste e Niterói.</p>
+      <a href="/index.html#empreendimentos">Ver todos os empreendimentos</a>
+    </div>
+  </div>
+</main>
+
+<footer><div class="wrap">Central de Vendas Cury · CRECI 23.670-J · Página de divulgação de corretor autorizado · <a href="/politica-de-privacidade.html">Política de Privacidade</a></div></footer>
+
+<script>
+(function(){
+  var msg = (LEAD && LEAD.msg) || 'Olá! Quero saber mais sobre os lançamentos Cury.';
+  var link = 'https://wa.me/' + TY.whatsapp + '?text=' + encodeURIComponent(msg);
+  var btn = document.getElementById('tyWpp');
+  btn.setAttribute('href', link);
+  if (TIPO === 'whatsapp') {
+    document.getElementById('tyEyebrow').textContent = 'Atendimento Cury';
+    document.getElementById('tyTitle').textContent = 'Obrigado pelo contato!';
+    document.getElementById('tyLead').textContent = 'Estamos abrindo o WhatsApp do especialista Cury com a sua mensagem. Ele vai te passar as condições e a simulação para a sua renda.';
+  } else if (LEAD && LEAD.nome) {
+    var p = String(LEAD.nome).split(/\s+/)[0];
+    p = p.charAt(0).toUpperCase() + p.slice(1).toLowerCase();
+    document.getElementById('tyTitle').textContent = 'Recebemos seu cadastro, ' + p + '!';
+  }
+  btn.addEventListener('click', function(){ if (window.fbq) fbq('trackCustom', 'ObrigadoWhatsClick', { origem: ORIGEM }); });
+  var timer = document.getElementById('tyTimer');
+  if (CONTAR) {
+    var s = TIPO === 'whatsapp' ? TY.segundosWhats : TY.segundosForm;
+    var tick = function(){
+      if (s <= 0) { timer.innerHTML = 'Abrindo o WhatsApp...'; location.href = link; return; }
+      timer.innerHTML = 'Abrindo o WhatsApp em <b>' + s + 's</b>. Se não abrir, toque no botão acima.';
+      s--; setTimeout(tick, 1000);
+    };
+    tick();
+  }
+})();
+</script>
+</body>
+</html>
