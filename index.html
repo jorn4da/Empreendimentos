@@ -152,6 +152,11 @@ section{padding:76px 0}.head{text-align:center;max-width:640px;margin:0 auto 38p
       var t=v.currentTime||0; cur=k; v.poster=S[k][1];
       if(rm) return;
       v.src=S[k][0];
+      v.onerror=function(){ /* se a versão escolhida faltar, cai para a próxima e por último para o vídeo antigo */
+        S.old=['assets/video-topo.mp4','assets/video-poster.jpg'];
+        if(cur==='old') return; cur=(cur==='fhd')?'old':'fhd';
+        v.poster=S[cur][1]; v.src=S[cur][0]; play();
+      };
       if(t) v.addEventListener('loadedmetadata',function f(){v.removeEventListener('loadedmetadata',f);try{v.currentTime=t}catch(e){}});
       play();
     }
