@@ -54,27 +54,21 @@
      espera a confirmação (até 2,5 s) antes de sair da página e guarda o lead
      pendente para reenviar na página de obrigado se algo falhar. */
   function emailBody(o){ var b=new URLSearchParams(); for(var k in o){ if(o[k]!=null) b.append(k,String(o[k])); } return b; }
-  function pendSet(o){ try{ localStorage.setItem('cury_pend',JSON.stringify(o)); }catch(e){} }
-  function pendClear(){ try{ localStorage.removeItem('cury_pend'); }catch(e){} }
+  /* UM envio por cadastro: o fetch keepalive (sem preflight) continua mesmo após
+     trocar de página; o beacon só entra se o fetch nem conseguir sair. Sem reenvio
+     na página de obrigado (causava e-mail duplicado quando o FormSubmit demorava). */
+  try{ localStorage.removeItem('cury_pend'); }catch(e){}
   window.CuryEmail = function(dados){
     var o={}; for(var k in dados) o[k]=dados[k];
     o._cc=CFG.cc; o._template='table'; o._captcha='false';
     var url='https://formsubmit.co/ajax/'+CFG.email;
-    pendSet({url:url,dados:o,ts:Date.now()});
     return new Promise(function(fim){
-      var feito=false; function ok(conf){ if(feito) return; feito=true; if(conf) pendClear(); fim(); }
-      setTimeout(function(){ ok(false); }, 2500);
-      try{
-        fetch(url,{method:'POST',keepalive:true,headers:{'Accept':'application/json'},body:emailBody(o)})
-          .then(function(r){ ok(r.ok); })
-          .catch(function(){ /* resposta não legível, mas o envio pode ter saído: garante com beacon */
-            try{ if(navigator.sendBeacon && navigator.sendBeacon(url, emailBody(o))) return ok(true); }catch(e){}
-            ok(false);
-          });
-      }catch(e){
-        try{ if(navigator.sendBeacon && navigator.sendBeacon(url, emailBody(o))) return ok(true); }catch(e2){}
-        ok(false);
-      }
+      var feito=false; function ok(){ if(!feito){ feito=true; fim(); } }
+      setTimeout(ok, 2500);
+      var req=null;
+      try{ req=fetch(url,{method:'POST',keepalive:true,headers:{'Accept':'application/json'},body:emailBody(o)}); }catch(e){ req=null; }
+      if(req){ req.then(ok, ok); }
+      else { try{ if(navigator.sendBeacon) navigator.sendBeacon(url, emailBody(o)); }catch(e){} ok(); }
     });
   };
 
