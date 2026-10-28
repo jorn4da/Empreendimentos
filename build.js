@@ -181,7 +181,11 @@ fbq('init', '1902592370422998');
 fbq('track', 'PageView');
 </script>
 <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1902592370422998&ev=PageView&noscript=1"/></noscript>
-<!-- End Meta Pixel Code -->`;
+<!-- End Meta Pixel Code -->
+<!-- Google tag (GA4 + Google Ads via generate_lead) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0LHY05WGV6"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-0LHY05WGV6');</script>
+<!-- End Google tag -->`;
 
 // Rastreia clique em qualquer link do WhatsApp como evento Contact (Pixel + dataLayer)
 const TRACK = `<script>

@@ -45,13 +45,29 @@ if (CONTAR) {
 </script>
 <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1902592370422998&ev=PageView&noscript=1"/></noscript>
 <!-- End Meta Pixel Code -->
+<!-- Google tag (GA4): generate_lead = conversao "Enviar formularios de lead" no Google Ads -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0LHY05WGV6"></script>
 <script>
 window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-0LHY05WGV6');
 if (CONTAR) {
+  var RENDA = '';
+  try { RENDA = (JSON.parse(localStorage.getItem('cury_cli') || '{}').renda) || ''; } catch(e) {}
+  /* Formulario e modal do WhatsApp coletam nome, WhatsApp e renda: os dois contam como lead */
+  gtag('event', 'generate_lead', {
+    origem: ORIGEM,
+    tipo: TIPO,
+    empreendimento: (LEAD.empreendimento || TY.empreendimento),
+    renda: RENDA,
+    page_type: 'obrigado'
+  });
   dataLayer.push({ event: TIPO === 'whatsapp' ? 'whatsapp_obrigado' : 'lead_obrigado', origem: ORIGEM });
   try { sessionStorage.setItem('ty_done_' + LEAD.id, '1'); } catch(e) {}
 }
 </script>
+<!-- End Google tag -->
 
 <style>
 :root{--navy:#14213D;--navy-2:#1B2A4A;--blue:#3B5BE0;--blue-dark:#2A44C4;--blue-soft:#EAEEFF;--bg:#F5F6F8;--white:#fff;--text:#1B2A4A;--muted:#5B6472;--line:#E4E7EC;--wa:#25D366;--radius:16px}
