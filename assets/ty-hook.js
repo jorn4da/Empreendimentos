@@ -12,7 +12,8 @@
     whatsapp: '5521959434519',
     email: 'imoveisjornada@gmail.com',
     sheet: 'https://script.google.com/macros/s/AKfycbyeCg1rfo85NcgTM15vE2dLzhPqomi23nAiLItM63QqhwqTC5CAmoihL2J713Dqx-nB/exec',
-    site: 'curyoficial.com'
+    site: 'curyoficial.com',
+    cc: 'aritan.rj@curyvendas.com.br'
   };
   var EMPS = ['Residencial Dona Ivone Lara','Erê','Nova Leopoldina','Orla Central','Saudosa Praça Onze','Luzes do Rio - Condomínio Lamparina','Parque Piedade - Condomínio Aquarela','Luzes do Rio','Farol da Guanabara','Nova Norte - Raízes','Residencial Cartola','Residencial Pixinguinha','Caminhos da Guanabara','Arcos do Porto Residencial','Ciata Residencial','Residencial Nova Olaria','Metropolitan Dream','The Pier Residencial','My Jacarepaguá Mood','Américas 19'];
   var INDECISO = 'Ainda não decidi / quero ver opções';
@@ -45,12 +46,43 @@
       + (d.origem ? '\n• Origem: '+d.origem : '');
   };
 
+
+  /* ---------- Envio de e-mail CONFIÁVEL (corrigido 28/10/2026) ----------
+     Antes: JSON + redirect em 150-400 ms. O JSON exige "preflight" (CORS) e o
+     navegador cancelava o envio ao trocar de página, sobretudo no celular.
+     Agora: corpo form-urlencoded (sem preflight), keepalive, sendBeacon de reserva,
+     espera a confirmação (até 2,5 s) antes de sair da página e guarda o lead
+     pendente para reenviar na página de obrigado se algo falhar. */
+  function emailBody(o){ var b=new URLSearchParams(); for(var k in o){ if(o[k]!=null) b.append(k,String(o[k])); } return b; }
+  function pendSet(o){ try{ localStorage.setItem('cury_pend',JSON.stringify(o)); }catch(e){} }
+  function pendClear(){ try{ localStorage.removeItem('cury_pend'); }catch(e){} }
+  window.CuryEmail = function(dados){
+    var o={}; for(var k in dados) o[k]=dados[k];
+    o._cc=CFG.cc; o._template='table'; o._captcha='false';
+    var url='https://formsubmit.co/ajax/'+CFG.email;
+    pendSet({url:url,dados:o,ts:Date.now()});
+    return new Promise(function(fim){
+      var feito=false; function ok(conf){ if(feito) return; feito=true; if(conf) pendClear(); fim(); }
+      setTimeout(function(){ ok(false); }, 2500);
+      try{
+        fetch(url,{method:'POST',keepalive:true,headers:{'Accept':'application/json'},body:emailBody(o)})
+          .then(function(r){ ok(r.ok); })
+          .catch(function(){ /* resposta não legível, mas o envio pode ter saído: garante com beacon */
+            try{ if(navigator.sendBeacon && navigator.sendBeacon(url, emailBody(o))) return ok(true); }catch(e){}
+            ok(false);
+          });
+      }catch(e){
+        try{ if(navigator.sendBeacon && navigator.sendBeacon(url, emailBody(o))) return ok(true); }catch(e2){}
+        ok(false);
+      }
+    });
+  };
+
   function postLead(d){
     var agora=new Date().toLocaleString('pt-BR');
     try{ fetch(CFG.sheet,{method:'POST',mode:'no-cors',keepalive:true,headers:{'Content-Type':'text/plain;charset=utf-8'},
       body:JSON.stringify({Nome:d.nome,WhatsApp:d.fone,Renda:d.renda,Empreendimento:d.emp,Interesse:'WhatsApp · '+d.origem,Origem:location.href})}).catch(function(){}); }catch(e){}
-    try{ fetch('https://formsubmit.co/ajax/'+CFG.email,{method:'POST',keepalive:true,headers:{'Content-Type':'application/json','Accept':'application/json'},
-      body:JSON.stringify({_subject:'Novo lead - '+d.emp+' | Cury Lançamentos (WhatsApp)','Empreendimento de interesse':d.emp,Nome:d.nome,WhatsApp:d.fone,'Renda familiar':d.renda,'Botão clicado':d.origem,'Recebido em':agora,Origem:location.href,_template:'table',_captcha:'false'})}).catch(function(){}); }catch(e){}
+    return window.CuryEmail({_subject:'Novo lead - '+d.emp+' | Cury Lançamentos (WhatsApp)','Empreendimento de interesse':d.emp,Nome:d.nome,WhatsApp:d.fone,'Renda familiar':d.renda,'Botão clicado':d.origem,'Recebido em':agora,Origem:location.href});
   }
 
   window.irObrigado = function(origem, nome, msg, tipo, delay, emp){
@@ -136,10 +168,10 @@
     if(!ok){ primeiro.focus(); return; }
     var d={emp:emp,nome:nome,fone:fone,renda:renda,origem:ORIGEM};
     lsSet({nome:nome,fone:fone,renda:renda});
-    postLead(d);
+    var envio=postLead(d);
     if(window.dataLayer) dataLayer.push({event:'form_submit',form_origin:'modal_whatsapp',empreendimento:emp});
     var btn=g('cmForm').querySelector('.cm-btn'); btn.disabled=true; btn.lastChild.textContent='Abrindo o WhatsApp...';
-    window.irObrigado(ORIGEM, nome, window.CuryMsg(d), 'form', 350, emp);
+    envio.then(function(){ window.irObrigado(ORIGEM, nome, window.CuryMsg(d), 'form', 0, emp); });
   }
 
   /* Intercepta todo link de WhatsApp da página */

@@ -445,11 +445,10 @@ var btn=document.getElementById('leadBtn'); if(btn){btn.disabled=true;btn.textCo
 if(window.dataLayer)dataLayer.push({event:'form_submit',form_origin:'hero',empreendimento:proj});
 /* Pixel Lead dispara na página de obrigado */
 if(window.CuryTrack)CuryTrack.lead('hero');
-fetch('https://script.google.com/macros/s/AKfycbyeCg1rfo85NcgTM15vE2dLzhPqomi23nAiLItM63QqhwqTC5CAmoihL2J713Dqx-nB/exec',{method:'POST',mode:'no-cors',keepalive:true,headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({Nome:n,WhatsApp:f,Renda:r,Empreendimento:proj,Interesse:'Cadastro site',Origem:location.href})}).catch(function(){});fetch('https://formsubmit.co/ajax/imoveisjornada@gmail.com',{method:'POST',keepalive:true,headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({_subject:'Novo lead'+(proj?(' - '+proj):'')+' | Cury Lançamentos','Empreendimento de interesse':proj,Nome:n,WhatsApp:f,'Renda familiar':r,Origem:location.href,_template:'table',_captcha:'false'})})
-.catch(function(){});
+fetch('https://script.google.com/macros/s/AKfycbyeCg1rfo85NcgTM15vE2dLzhPqomi23nAiLItM63QqhwqTC5CAmoihL2J713Dqx-nB/exec',{method:'POST',mode:'no-cors',keepalive:true,headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({Nome:n,WhatsApp:f,Renda:r,Empreendimento:proj,Interesse:'Cadastro site',Origem:location.href})}).catch(function(){});var envioEmail=(window.CuryEmail?CuryEmail({_subject:'Novo lead'+(proj?(' - '+proj):'')+' | Cury Lançamentos','Empreendimento de interesse':proj,Nome:n,WhatsApp:f,'Renda familiar':r,'Botão clicado':'Hub · Formulário','Recebido em':new Date().toLocaleString('pt-BR'),Origem:location.href}):Promise.resolve());
 var msg=window.CuryMsg?CuryMsg({emp:proj,nome:n,fone:f,renda:r,origem:'Hub · Formulário'}):('Olá! Quero receber as condições exclusivas dos lançamentos Cury.\nEmpreendimento de interesse: '+proj+'\nNome: '+n+'\nWhatsApp: '+f+'\nRenda familiar: '+r);
 try{localStorage.setItem('cury_cli',JSON.stringify({nome:n,fone:f,renda:r}));}catch(e){}
-if(window.irObrigado){ irObrigado('Formulário Hero', n, msg, 'form', 400); try{var t=JSON.parse(sessionStorage.getItem('ty_lead'));t.empreendimento=proj||'';sessionStorage.setItem('ty_lead',JSON.stringify(t));}catch(e){} }
+if(window.irObrigado){ envioEmail.then(function(){ irObrigado('Formulário Hero', n, msg, 'form', 0, proj); }); }
 else { sucessoLead(); window.open('https://wa.me/5521959434519?text='+encodeURIComponent(msg),'_blank'); }
 return false;}
 // Pré-seleciona o empreendimento quando o cliente vem de uma página específica (?proj=Nome)

@@ -185,5 +185,9 @@ footer a{color:#9FB2FF}
   }
 })();
 </script>
+<script>/* Reenvio do lead pendente (e-mail que não confirmou antes da troca de página) */
+(function(){try{var p=JSON.parse(localStorage.getItem('cury_pend')||'null');if(!p||Date.now()-p.ts>864e5){localStorage.removeItem('cury_pend');return;}
+var b=new URLSearchParams();for(var k in p.dados)b.append(k,String(p.dados[k]));
+fetch(p.url,{method:'POST',keepalive:true,headers:{'Accept':'application/json'},body:b}).then(function(r){if(r.ok)localStorage.removeItem('cury_pend');}).catch(function(){try{if(navigator.sendBeacon&&navigator.sendBeacon(p.url,b))localStorage.removeItem('cury_pend');}catch(e){}});}catch(e){}})();</script>
 </body>
 </html>
